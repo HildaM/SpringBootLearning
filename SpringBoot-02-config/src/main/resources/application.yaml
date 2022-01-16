@@ -1,0 +1,19 @@
+server:
+  port: 9090
+
+
+person:
+  name: quan_${random.uuid} # 随机uuid
+  age: ${random.int}        # 随机int
+  happy: true
+  birth: 2022/01/01
+  maps: {k1: v1, k2: v2}
+  lists:
+    - code
+    - girl
+    - drawing
+  dog:
+    name: _dog1_${person.hello:other}
+    age: 1
+
+# Date类不允许使用: 2022.01.01。直接报错

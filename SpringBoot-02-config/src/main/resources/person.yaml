@@ -1,0 +1,15 @@
+person2:
+  name: quan_success${random.uuid} # ??uuid
+  age: ${random.int}        # ??int
+  happy: true
+  birth: 2022/01/01
+  maps: {k1: v1, k2: v2}
+  lists:
+    - code
+    - girl
+    - drawing
+  dog:
+    name: ${person.hello:other}_dog1
+    age: 1
+
+
