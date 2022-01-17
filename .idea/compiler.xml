@@ -2,12 +2,14 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SpringBootLearning" />
         <module name="HelloSpringBoot" />
+        <module name="SpringBoot-04-WebProject" />
         <module name="SpringBoot-02-config" />
         <module name="SpringBoot-03-Web" />
       </profile>
@@ -18,6 +20,7 @@
       <module name="HelloSpringBoot" options="-parameters" />
       <module name="SpringBoot-02-config" options="-parameters" />
       <module name="SpringBoot-03-Web" options="-parameters" />
+      <module name="SpringBoot-04-WebProject" options="-parameters" />
     </option>
   </component>
 </project>
