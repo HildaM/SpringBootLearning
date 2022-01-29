@@ -12,6 +12,7 @@
         <module name="SpringBoot-04-WebProject" />
         <module name="SpringBoot-02-config" />
         <module name="SpringBoot-03-Web" />
+        <module name="SpringBoot-05-Security" />
       </profile>
     </annotationProcessing>
   </component>
@@ -21,6 +22,7 @@
       <module name="SpringBoot-02-config" options="-parameters" />
       <module name="SpringBoot-03-Web" options="-parameters" />
       <module name="SpringBoot-04-WebProject" options="-parameters" />
+      <module name="SpringBoot-05-Security" options="" />
     </option>
   </component>
 </project>
