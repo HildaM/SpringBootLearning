@@ -5,3 +5,4 @@
 2. 2022-01-16: 学习到springboot静态资源配置的问题
 3. 2022-01-17：学习了springmvc在springboot上的拓展，做一个小项目练习。国际化操作、登录模块、登录拦截器
 4. 2022-01-29：学习Spring Security.
+5. 2022-02-16：重新深入学习springsecurity和jwt
