@@ -36,6 +36,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         // 1. 获取token，获取请求头的token
         String token = request.getHeader("token");
         if (!StringUtils.hasText(token)) {
+            // 为空，属于第一次登录
             // 放行。后面的过滤器会判断token的信息，如果没有，那也会在后面被拦截，所以这里就直接放行了
             filterChain.doFilter(request, response);
             // 避免后面的过滤器响应回来的时候，会执行下面的代码。所以需要在这里截断，直接return！！！
@@ -54,13 +55,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
         // 3. 从redis中获取用户信息
         String redisKey = "login:" + userId;
-        LoginUser loginUser = redisCache.getCacheObject(redisKey);
+        LoginUser loginUser = redisCache.getCacheObject(redisKey);  // 读取redis中存放的用户信息和权限信息
         if (Objects.isNull(loginUser)) {
             throw new RuntimeException("用户未登录");
         }
 
         // 4. 存入scrutinyContextHolder，因为后续的过滤器都是从这里获取认证信息的
         // TODO 获取权限信息，封装到Auhtentication中！
+
         UsernamePasswordAuthenticationToken authenticationToken =
                 // 使用三个参数的构造，第三个参数代表用户已经认证成功！
                 new UsernamePasswordAuthenticationToken(loginUser, null, null);
