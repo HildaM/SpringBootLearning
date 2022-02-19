@@ -16,6 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -61,11 +64,10 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
 
         // 4. 存入scrutinyContextHolder，因为后续的过滤器都是从这里获取认证信息的
-        // TODO 获取权限信息，封装到Auhtentication中！
-
+        // loginUser.getAuthorities()：获取权限信息，封装到Auhtentication中！
         UsernamePasswordAuthenticationToken authenticationToken =
                 // 使用三个参数的构造，第三个参数代表用户已经认证成功！
-                new UsernamePasswordAuthenticationToken(loginUser, null, null);
+                new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
 
