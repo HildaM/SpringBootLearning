@@ -3,6 +3,7 @@ package com.quan.springboot06security.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.quan.springboot06security.domain.LoginUser;
 import com.quan.springboot06security.domain.User;
+import com.quan.springboot06security.mapper.MenuMapper;
 import com.quan.springboot06security.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +27,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
+    
+    @Autowired
+    private MenuMapper menuMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,8 +44,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
         // 2. 查询对应的权限信息
-        List<String> list = new ArrayList<>(Arrays.asList("test", "admin"));  // 先将权限写死，方便测试
-
+//        List<String> list = new ArrayList<>(Arrays.asList("test", "admin"));  // 先将权限写死，方便测试
+        menuMapper.selectPermsByUserId(user.getId())
 
         // 3. 封装成UserDetails返回
         return new LoginUser(user, list);

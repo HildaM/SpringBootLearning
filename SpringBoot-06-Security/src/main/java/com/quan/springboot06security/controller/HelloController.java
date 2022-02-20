@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @RequestMapping("/hello")
-    @PreAuthorize("hasAuthority('test')")   // 注意不要使用两个双引号！！！
+    @PreAuthorize("hasAuthority('system:test:list')")   // 注意不要使用两个双引号！！！
     public String hello() {
         return "hello";
     }

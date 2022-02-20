@@ -1,6 +1,7 @@
 package com.quan.springboot06security;
 
 import com.quan.springboot06security.domain.User;
+import com.quan.springboot06security.mapper.MenuMapper;
 import com.quan.springboot06security.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,23 @@ class SpringBoot06SecurityApplicationTests {
     private UserMapper userMapper;
 
     @Autowired
+    private MenuMapper menuMapper;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Test
     void testUserMapper() {
         List<User> users = userMapper.selectList(null);
         System.out.println(users);
+    }
+
+    @Test
+    public void testMenuMapper() {
+        List<String> strings = menuMapper.selectPermsByUserId(1L);
+        for (String string : strings) {
+            System.out.println(string);
+        }
     }
 
 

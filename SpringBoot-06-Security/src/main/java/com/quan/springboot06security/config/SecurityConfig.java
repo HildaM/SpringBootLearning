@@ -1,6 +1,8 @@
 package com.quan.springboot06security.config;
 
 import com.quan.springboot06security.filter.JwtAuthenticationTokenFilter;
+import com.quan.springboot06security.handler.AccessDeniedHandlerImpl;
+import com.quan.springboot06security.handler.AuthenticationEntryPointImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
+    @Autowired
+    private AuthenticationEntryPointImpl authenticationEntryPoint;
+
+    @Autowired
+    private AccessDeniedHandlerImpl accessDeniedHandler;
+
     // 注入容器
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    // 配置Security过滤
+    // 配置Security
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -57,6 +65,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 配置过滤器
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
+
+        // 配置异常处理器
+        http.exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint)  // 认证失败处理器
+                .accessDeniedHandler(accessDeniedHandler);           // 授权失败处理器
+
+
+        // 允许跨域
+        http.cors();
     }
 
 
